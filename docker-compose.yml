@@ -1,0 +1,18 @@
+services:
+  opencode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REGISTRY: ghcr.io/anomalyco
+        TAG: "24.04"
+    image: opencode:local
+    stdin_open: true
+    tty: true
+    # 运行容器时挂载当前项目目录并作为工作目录
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    # 如果需要，可设置环境变量（例如 OPENCODE_CONFIG_CONTENT）
+    environment:
+      OPENCODE_CONFIG_CONTENT: '{"model":"gpt-4o-mini"}'
